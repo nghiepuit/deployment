@@ -32,11 +32,11 @@ var AuthService = /** @class */ (function (_super) {
                 // Validate jwt
                 .use(function (req, res, next) {
                 // allow token to be passed through query parameter as well
-                if (req.query && req.query.hasOwnProperty('token')) {
+                if (req.query && req.query.token && req.query.hasOwnProperty('token')) {
                     req.headers.authorization = "Bearer " + req.query.token;
                 }
                 // IE11 forgets to set Authorization header sometimes. Pull from cookie instead.
-                if (req.query && typeof req.headers.authorization === 'undefined') {
+                if (req.query && typeof req.headers.authorization !== 'undefined') {
                     req.headers.authorization = "Bearer " + req.cookies.token;
                 }
                 validateJwt(req, res, next);
