@@ -12,7 +12,8 @@ var app = express();
 exports.app = app;
 app.use(compression());
 dotenv.load({ path: '.env' });
-app.set('port', (process.env.PORT || 3001));
+var PORT = 80; // 80 : deployment
+app.set('port', (process.env.PORT || PORT));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
