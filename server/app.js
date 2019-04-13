@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var bodyParser = require("body-parser");
 var dotenv = require("dotenv");
 var express = require("express");
-var morgan = require("morgan");
 var mongoose = require("mongoose");
-var session = require('express-session');
+var morgan = require("morgan");
 var routes_1 = require("./routes");
+var cors = require("cors");
+var session = require('express-session');
 var compression = require('compression');
 var app = express();
 exports.app = app;
@@ -14,6 +15,14 @@ app.use(compression());
 dotenv.load({ path: '.env' });
 var PORT = 80; // 80 : deployment
 app.set('port', (process.env.PORT || PORT));
+app.use(cors());
+app.all("*", function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Key, Authorization");
+    next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
