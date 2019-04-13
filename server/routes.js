@@ -34,6 +34,7 @@ function default_1(app) {
         res.sendFile(path.resolve("./public/index.html"));
     });
     app.use(function (err, req, res, next) {
+        console.log(err);
         if (err.status === 401) {
             res.status(401).send(err);
         }

@@ -25,6 +25,7 @@ var passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/shopnx-dev', { useMongoClient: true });
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://nghiepuit:Nghiep2014@ds115671.mlab.com:15671/shop-dev', { useMongoClient: true });
 var db = mongoose.connection;
 mongoose.Promise = global.Promise;
 db.on('error', console.error.bind(console, 'connection error:'));
